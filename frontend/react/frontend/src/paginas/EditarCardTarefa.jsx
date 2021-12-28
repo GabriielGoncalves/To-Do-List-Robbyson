@@ -10,7 +10,6 @@ function EditarCardTarefa(){
     let history = useHistory()
     const { id } = useParams()
     const [tarefa, setTarefa] = useState({})
-    const [descricao, setDescricao] = useState(tarefa.descricao)
     const [data, setData] = useState('')
     
     useEffect( () => {
@@ -22,11 +21,20 @@ function EditarCardTarefa(){
             history.push('/404')
         })
     }, [])
+    
+    const [descricao, setDescricao] = useState(tarefa.descricao)
 
     function atualizarTarefa(descricao, data){
+        const [ano, mes, dia] = data.split('-')
         api.put(`/tarefas/atualizar/${tarefa._id}`, {
-            titulo: tarefa.titulo, descricao, data, arquivado: tarefa.arquivado, concluido: tarefa.concluido
+            titulo: tarefa.titulo, descricao, data: `${dia}/${mes}/${ano}`, arquivado: tarefa.arquivado, concluido: tarefa.concluido
         })
+        .then( (response) => {
+            if(response.status === 200) {
+                alert('Tarefa atualizada com sucesso.')
+            }
+        })
+        .catch(e => console.log(e))
     }
 
 
@@ -76,13 +84,13 @@ function EditarCardTarefa(){
                         atualizarTarefa(descricao, data)
                         setDescricao('')
                         setData('')}
-                        } > <Link to={'/'}>Salvar</Link></button>
+                        } > <Link to={'/tarefas'}>Salvar</Link></button>
 
                     <button 
                     type="button"
                     className='botao-tarefa-cancelar' onClick={() => {
 
-                    }} > <Link to={'/'}>Cancelar</Link></button>
+                    }} > <Link to={'/tarefas'}>Cancelar</Link></button>
             </form>
         </div>
     )

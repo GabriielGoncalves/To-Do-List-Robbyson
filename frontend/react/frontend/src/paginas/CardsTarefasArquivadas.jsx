@@ -45,7 +45,10 @@ function CardsTarefasArquivadas() {
                                         <button 
                                         className='botao-apagar' 
                                         style={{ backgroundColor: "#a5a1a1" }}
-                                        onClick={() => {deletarCard(tarefa)}}
+                                        onClick={() => {
+                                            if( window.confirm('Você tem certeza que deseja excluir esta tarefa?') ){
+                                                {deletarCard(tarefa)}}}
+                                            }
                                         >
                                             <i class="bi bi-trash-fill" >
                                                 <svg xmlns="http://www.w3.org/2000/svg" 

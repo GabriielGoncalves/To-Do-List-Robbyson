@@ -7,18 +7,18 @@ const FormularioTarefa = () => {
     const [titulo, setTitulo] = useState('')
     const [descricao, setDescricao] = useState('')
     const [data, setData] = useState('')
-    const [erros, setErros] = useState({titulo: {valido: true, texto:''}, descricao:{valido: true, texto:''}})
 
     function inserirTarefa(titulo, descricao, data){
+        const [ano, mes, dia] = data.split('-')
         api.post('tarefas/inserir-tarefa', {
-            titulo, descricao, data ,arquivado: false, concluido: false
+            titulo, descricao, data: `${dia}/${mes}/${ano}` ,arquivado: false, concluido: false
         })
         .then((response) => {
-            if (response.status === 200){
+            if (response.status === 201){
                 alert('Tarefa incluida com sucesso')
             }
         })
-        .catch(e => alert(e))
+        .catch(e => console.log(e))
     }
 
     return (

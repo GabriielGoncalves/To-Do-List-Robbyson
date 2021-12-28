@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import api from '../services/api';
 import { Link } from 'react-router-dom';
 import '../css/CardTarefa.css'
 
 function CardsTarefas({ tarefas, buscarTarefas }) {
-    // const [descricaoTarefaPesquisada, setDescricaoTarefaPesquisada] = useState('')
-
-    
 
     function excluirTarefa(tarefa){
         api.delete(`tarefas/deletar/${tarefa._id}`)
@@ -23,7 +20,7 @@ function CardsTarefas({ tarefas, buscarTarefas }) {
         api.patch(`tarefas/concluir/${tarefa._id}`)
         .then( (response) => {
             if(response.status === 200){
-                alert('Deu bom')
+                alert(`Tarefa "${tarefa.titulo}" foi concluída.`)
                 buscarTarefas()
             }
         })
@@ -42,16 +39,6 @@ function CardsTarefas({ tarefas, buscarTarefas }) {
             console.log(e)
         })
     }
-
-    // function procurarTarefa(descricao){
-    //     api.get('tarefas/pesquisar/descricao',{
-    //         descricaoTarefaPesquisada : descricao
-    //     })
-    //     .then( response => {
-    //         setDescricaoTarefaPesquisada(response)
-    //     })
-    //     .catch(e => console.log(e))
-    // }
 
 
     return (
@@ -112,7 +99,10 @@ function CardsTarefas({ tarefas, buscarTarefas }) {
                                                 <button 
                                                 className='botao-apagar' 
                                                 style={{ backgroundColor: "#a5a1a1" }}
-                                                onClick={() => {excluirTarefa(tarefa)}}
+                                                onClick={() => {
+                                                    if( window.confirm('Você tem certeza que deseja excluir esta tarefa?') ){
+                                                        excluirTarefa(tarefa)}}
+                                                    }
                                                 >
                                                     <i className="bi bi-trash-fill" >
                                                         <svg xmlns="http://www.w3.org/2000/svg" 
