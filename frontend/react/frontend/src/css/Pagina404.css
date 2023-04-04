@@ -1,8 +1,0 @@
-h1{
-    text-align: center;
-}
-
-h1 > a{
-    color: black;
-    text-decoration: underline;
-}
