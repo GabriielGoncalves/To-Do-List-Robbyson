@@ -1,0 +1,47 @@
+.menu{
+    display: flex;
+    margin: 0;
+    padding: 0;
+    height: 100px;
+    background-color: rgb(192, 49, 192);
+    border-bottom: solid 2px aquamarine ;
+}
+.menu > ul{
+    display: flex;
+    margin-top: 5px;
+    flex-grow: 1;
+    justify-content: space-around;
+    align-items: center;
+}
+.menu .menu-botoes{
+    list-style: none; /*retira as marcações da ul*/
+    align-self: center;
+}
+.form-menu{
+    display: flex;
+}
+.menu{
+    background-color: #000080;
+}
+.botao-menu{
+    background-color: #6A5ACD;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    padding: 0 10px;
+    color: rgb(15, 15, 15);
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 8px;
+    font-family: 'Roboto Condensed', sans-serif;
+    text-decoration: none;
+}
+.logo-robbyson{
+    cursor: pointer;
+}
+
+@media (max-width: 900px ){
+    .botao-menu{
+        font-size: 13px;
+    }
+}

@@ -31,7 +31,7 @@ export class Application {
         await mongoose
             .connect(process.env.DB_URL as string)
             .then(() =>
-                this.app.listen(process.env.PORT, () => {
+                this.app.listen(process.env.PORT || 8080, () => {
                     console.log('Application is running');
                 }),
             )

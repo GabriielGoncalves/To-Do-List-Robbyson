@@ -1,13 +1,10 @@
 import { Request, Response } from 'express';
-import { ITaskSchema } from '../interfaces/ITaskSchema';
 import { InsertTaskService } from '../services/InsertTaskService';
+import { TaskService } from '../services/TaskService';
 
-export class InsertTaskController {
+export class InsertTaskController extends TaskService {
     async execute(req: Request, res: Response) {
-        const task: ITaskSchema = req.body;
-        const service = new InsertTaskService();
-
-        const result = await service.insert(task);
+        const result = await new InsertTaskService().insert(req.body);
 
         return res.status(201).json({ msg: result });
     }

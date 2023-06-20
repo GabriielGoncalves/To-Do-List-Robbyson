@@ -1,0 +1,23 @@
+.card-nota{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.pesquisa{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.pesquisa > input{
+    margin-top: 5px;
+    width: 750px;
+    height: 30px;
+    margin-right: 100px;
+    border-radius: 5px;
+    font-size: 15px;
+    border: #bfc1c2;
+}

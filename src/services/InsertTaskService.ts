@@ -1,10 +1,9 @@
 import { ITaskSchema } from '../interfaces/ITaskSchema';
-import { TaskDatabase } from '../model/TaskDatabase';
+import { TaskService } from './TaskService';
 
-export class InsertTaskService {
+export class InsertTaskService extends TaskService {
     async insert(task: ITaskSchema) {
-        const db = new TaskDatabase();
-        const result = await db.register(task);
+        const result = await this.repository.register(task);
 
         return result;
     }

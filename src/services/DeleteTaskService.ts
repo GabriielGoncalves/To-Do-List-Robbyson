@@ -1,9 +1,7 @@
-import { TaskDatabase } from '../model/TaskDatabase';
+import { TaskService } from './TaskService';
 
-export class DeleteTaskService {
+export class DeleteTaskService extends TaskService {
     async deleteTask(id: string) {
-        const database = new TaskDatabase();
-
-        return await database.delete(id);
+        return await this.repository.delete(id);
     }
 }

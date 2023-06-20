@@ -1,24 +1,17 @@
+import { createTask } from '../utils/task';
+import { IDBRepository } from '../interfaces/IDBRepository';
 import { ITaskSchema } from '../interfaces/ITaskSchema';
 import { TaskModel } from './models/TaskModel';
 
-export class TaskDatabase {
-    async register(task: ITaskSchema) {
-        const newTask = this.createTask(task);
-
+class TaskDatabase implements IDBRepository {
+    async register(task: ITaskSchema): Promise<ITaskSchema> {
+        const newTask = createTask(task);
         newTask.save();
 
         return newTask;
     }
 
-    private createTask(task: ITaskSchema) {
-        const newTask = new TaskModel();
-        newTask.description = task.description;
-        newTask.date = `${new Date().toLocaleDateString()}`;
-
-        return newTask;
-    }
-
-    async delete(id: string) {
+    async delete(id: string): Promise<string> {
         const foundedTask = await this.findTaskById(id);
 
         await TaskModel.deleteOne({ _id: foundedTask._id });
@@ -35,3 +28,7 @@ export class TaskDatabase {
         return task;
     }
 }
+
+const taskDatabase = new TaskDatabase();
+
+export default taskDatabase;
