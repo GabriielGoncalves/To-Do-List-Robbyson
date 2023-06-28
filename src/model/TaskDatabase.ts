@@ -4,6 +4,39 @@ import { ITaskSchema } from '../interfaces/ITaskSchema';
 import { TaskModel } from './models/TaskModel';
 
 class TaskDatabase implements IDBRepository {
+    async doneTask(id: any): Promise<any> {
+        return await TaskModel.updateOne(
+            {
+                _id: id,
+            },
+            {
+                $set: {
+                    done: true,
+                },
+            },
+        );
+    }
+
+    async archiveTask(id: any): Promise<any> {
+        return await TaskModel.updateOne(
+            {
+                _id: id,
+            },
+            {
+                $set: {
+                    hide: true,
+                },
+            },
+        );
+    }
+
+    async findByDescription(data: string): Promise<any> {
+        const task = await TaskModel.findOne({
+            description: data,
+        });
+
+        return task;
+    }
     async register(task: ITaskSchema): Promise<ITaskSchema> {
         const newTask = createTask(task);
         newTask.save();
@@ -26,6 +59,15 @@ class TaskDatabase implements IDBRepository {
             throw new Error('Tarefa não encontrada');
         }
         return task;
+    }
+
+    async updateTask(id: string, data: ITaskSchema) {
+        return await TaskModel.updateOne(
+            {
+                _id: id,
+            },
+            data,
+        );
     }
 }
 

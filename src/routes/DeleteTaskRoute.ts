@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { DeleteTaskController } from '../controller/DeleteTaskController';
 
-export const DeleteTaskRoute = Router();
+export const deleteTaskRoute = Router();
 
-DeleteTaskRoute.delete('/delete/:id', new DeleteTaskController().execute);
+deleteTaskRoute.delete('/delete/:id', new DeleteTaskController().execute);

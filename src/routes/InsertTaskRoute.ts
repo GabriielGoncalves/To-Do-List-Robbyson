@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { InsertTaskController } from '../controller/InsertTaskController';
 
-export const InsertTaskRoute = Router();
+export const insertTaskRoute = Router();
 
-InsertTaskRoute.post('/insert', new InsertTaskController().execute);
+insertTaskRoute.post('/insert', new InsertTaskController().execute);

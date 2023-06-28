@@ -1,3 +1,4 @@
+import { TaskModel } from '../model/models/TaskModel';
 import { ITaskSchema } from '../interfaces/ITaskSchema';
 
 export const createTask = (task: ITaskSchema) => {
